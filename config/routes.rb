@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
   root to: 'campaigns#index'
 
-  resources :players
+  resources :players do
+    collection do
+      get 'sign_up', as: :new_registration, action: :new_registration
+      post 'sign_up', as: :create_registration, action: :create_registration
+    end
+  end
 
   get "login" => 'sessions#login', as: :login
-
   resources :sessions, only: [] do
     collection do
       post :go
