@@ -1,0 +1,13 @@
+.login_form
+  = form_for :session, url: {action: :go}, role: "form", class: "sign-in" do |f|
+    .form-group
+      %fieldset
+        %legend= t(:please_log_in)
+        .form-group
+          = f.label :email
+          = f.text_field :email, class: "form-control", placeholder: "Email"
+        .form-group
+          = f.label :password
+          = f.password_field :password, class: "form-control", placeholder: "Password"
+        %div
+          = f.submit "Login", class: "btn btn-primary"

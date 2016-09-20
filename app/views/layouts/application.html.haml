@@ -1,0 +1,81 @@
+!!! XML
+!!!
+%html
+  %head
+    %title= "Overlord Shovel"
+    = stylesheet_link_tag :application, media: :all, "data-turbolinks-track" => true
+    = javascript_include_tag :application, "data-turbolinks-track" => true
+
+    = csrf_meta_tags
+  %body
+    %nav{class: "navbar navbar-inverse navbar-fixed-top", role: :navigation}
+      .container-fluid
+        .navbar-header
+          %button{type: :button, class: "navbar-toggle", "data-toggle" => "collapse", "data-target" => "#bs-example-navbar-collapse-1"}
+            %span{class: "icon-bar"}
+            %span{class: "icon-bar"}
+            %span{class: "icon-bar"}
+          = link_to "Overlord Shovel", root_path, class: "navbar-brand"
+        - unless current_user.nil?
+          %div{class: "navbar-collapse collapse ", id: "bs-example-navbar-collapse-1"}
+            %ul{class: "nav navbar-nav"}
+              %li{class: is_controller?("campaigns")}= link_to t(:campaigns), campaigns_path
+              %li{class: is_controller?("players")}= link_to t(:players), players_path
+            %ul{ class: "nav navbar-nav navbar-right"}
+              %li.dropdown{id: 'menu'}
+                %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+                  = "#{current_user.email}"
+                  %b.caret
+                %ul.dropdown-menu
+                  %li{id: 'logout'}
+                    = link_to t(:logout), logout_sessions_path, method: :put
+                  %li{id: 'my_account'}
+                    = link_to "My Account", player_path(current_user)
+    .container
+      - if flash[:notice]
+        .alert.alert-warning
+          = flash[:notice]
+      - if flash[:alert]
+        .alert.alert-danger
+          = flash[:alert]
+          - if @errors.present?
+            %ul
+              - @errors.full_messages.each do |msg|
+                %li= msg
+      = yield
+/ !!!
+/ %html
+/   %head
+/     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+/     %title OverlordShovel
+/     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+/     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+/     = csrf_meta_tags
+/   %body
+/     %nav.navbar.navbar-inverse
+/       .container
+/         .navbar-header
+/           = link_to 'Devise Demo', root_path, class: 'navbar-brand'
+/         #navbar
+/           %ul.nav.navbar-nav
+/             %li= link_to 'Home', root_path
+/           %ul.nav.navbar-nav.pull-right
+/             - if player_signed_in?
+/               %li.dropdown
+/                 %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+/                   = current_user.first_name
+/                   %span.caret
+/                 %ul.dropdown-menu{:role => "menu"}
+/                   %li= link_to 'Profile', edit_player_registration_path
+/                   %li= link_to 'Log out', destroy_player_session_path, method: :delete
+/             - else
+/               %li= link_to 'Log In', new_player_session_path
+/               %li= link_to 'Sign Up', new_player_registration_path
+/     .container
+/       - flash.each do |key, value|
+/         %div{:class => "alert alert-#{key}"}
+/           = value
+/     = yield :top_content
+/     .container
+/       %h1= yield :header
+/       = yield

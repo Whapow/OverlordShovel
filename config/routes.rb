@@ -1,6 +1,19 @@
 Rails.application.routes.draw do
-  devise_for :players
-  root to: 'pages#index'
+  root to: 'campaigns#index'
+
+  resources :players
+
+  get "login" => 'sessions#login', as: :login
+
+  resources :sessions, only: [] do
+    collection do
+      post :go
+      put :logout
+    end
+  end
+
+  resources :campaigns
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
