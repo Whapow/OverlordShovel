@@ -20,4 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  please_log_in: "Please Log In"
+  logout_success: "Logout Success"
+  there_was_a_problem: "There Was A Problem"
+  invalid_email_password: "Incorrect Email/Password Combination"
+  password_mismatch: "The Passwords Did Not Match"
+  players: "Players"
+  new_player: "New Player"
+  create_new_account: "Sign Up"
+  campaigns: "Campaigns"
