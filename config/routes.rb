@@ -6,6 +6,9 @@ Rails.application.routes.draw do
       get 'sign_up', as: :new_registration, action: :new_registration
       post 'sign_up', as: :create_registration, action: :create_registration
     end
+    member do
+      resources :characters
+    end
   end
 
   get "login" => 'sessions#login', as: :login
@@ -16,7 +19,19 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :campaigns
+  resources :campaigns do
+    member do
+      resources :journals do
+        member do
+          resources :sessions
+        end
+      end
+    end
+  end
+
+  resources :items
+  resources :systems
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -15,7 +15,15 @@ class PlayersController < ApplicationController
   end
 
   def create
-
+    @player = Player.create(player_params)
+    if @player.save 
+      # flash[:notice] = "An invitation email has been sent to #{@player.first_name}!"
+      redirect_to :players
+    else
+      flash[:alert] = t(:there_was_a_problem)
+      @errors = @player.errors
+      render action: :new
+    end
   end
 
   def update

@@ -11,10 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920132229) do
+ActiveRecord::Schema.define(version: 20160921020008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "campaigns", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "system_id"
+    t.integer  "owner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "characters", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "player_id"
+    t.integer  "campaign_id"
+    t.string   "character_sheet"
+    t.string   "portrait_image"
+    t.string   "token_image"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "cuts", force: :cascade do |t|
+    t.integer  "session_id"
+    t.integer  "player_id"
+    t.integer  "experience_value"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer  "owner_id"
+    t.text     "description"
+    t.integer  "value"
+    t.string   "type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "journals", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "campaign_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "players", force: :cascade do |t|
     t.string   "first_name"
@@ -35,5 +78,18 @@ ActiveRecord::Schema.define(version: 20160920132229) do
 
   add_index "players", ["email"], name: "index_players_on_email", unique: true, using: :btree
   add_index "players", ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree
+
+  create_table "sessions", force: :cascade do |t|
+    t.integer  "journal_id"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "systems", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
