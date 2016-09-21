@@ -1,0 +1,10 @@
+= form_for :campaign, role: "form" do |f|
+  .form-group
+    %fieldset
+      %legend= t(:new_campaign)
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: "form-control", placeholder: "Campaign Name"
+      = f.hidden_field :owner_id, value: (@campaign.owner_id or current_user.id)
+      %div
+        = f.submit "Create", class: "btn btn-primary"

@@ -1,0 +1,39 @@
+%table{class: "table table-striped table-condensed table-hover"}
+  %thead
+    %tr
+      %th= t(:campaign_name)
+      %th= t(:owner)
+      %th= t(:game_system)
+      %th{colspan: 3}
+  %tbody
+    - @campaigns.each do |campaign|
+      %tr
+        %td= link_to campaign.name, campaign_path(campaign), 'data-no-turbolink' => true
+        %td= "#{campaign.owner.first_name} #{campaign.owner.last_name.first}"
+        %td
+          = "#{campaign.user.first_name} #{campaign.user.last_name.first}" unless campaign.user == nil
+          - if current_user.is_superuser?
+            %br
+            = Lessee.find_by_id(campaign.lessee_id).name
+        / %td= campaign.state
+        - if current_user.is_superuser?
+          %td= campaign.priority.name unless campaign.priority_id.blank?
+          - if campaign.state == "New"
+            %td{class: "#{'out-of-time' if Time.now >= deadline and campaign.state == 'New'}"}
+              = deadline.in_time_zone(session[:current_time_zone]).strftime("%H:%M<br>%b %d").html_safe
+          -else
+            %td
+              = "#{time_ago_in_words(campaign.updated_at)} ago"
+              - if last_commenter = campaign.try(:last_human_comment).try(:owner)
+                %br
+                = "#{last_commenter[:first_name]} #{last_commenter[:last_name].try(:first)}"
+        %td
+          - if campaign.followers.include?(current_user.email)
+            = link_to t(:unfollow), unfollow_campaign_path(campaign), class:"btn btn-danger pull-right"
+          - else
+            = link_to t(:follow), follow_campaign_path(campaign), class:"btn btn-info pull-right"
+        %td
+          - if campaign.state == "Resolved"
+            = link_to t(:reopen_campaign), new_campaign_conversation_path(campaign), class:"btn btn-danger pull-left"
+          - else
+            = link_to t(:mark_resolved), resolve_campaign_path(campaign), class:"btn btn-success pull-left"
