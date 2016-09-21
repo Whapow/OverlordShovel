@@ -20,8 +20,8 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
-  username: OverlordShovel
-  password: 
+  username: Whapow
+  password: <%= ENV['OS_DB_PWD'] %>
 
 development:
   <<: *default
@@ -84,6 +84,4 @@ test:
 #
 production:
   <<: *default
-  host: ENV['DATABASE_URL']
-  database: OS_db_prod
-  password: ENV['DATABASE_PASSWORD']
+  url: <%= ENV['DATABASE_URL'] %>
