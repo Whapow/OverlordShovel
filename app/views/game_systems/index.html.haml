@@ -10,3 +10,7 @@
         %td= game_system.name
         %td= link_to t(:edit), edit_game_system_path(game_system), class:"btn btn-info pull-right"
         %td= link_to t(:delete), game_system, method: :delete, class:"btn btn-danger pull-right"
+    %tr
+      %td= link_to t(:add_game_system), new_game_system_path, 'data-no-turbolink' => true
+      %td
+      %td

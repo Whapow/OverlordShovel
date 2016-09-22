@@ -22,7 +22,7 @@
 en:
   please_log_in: "Please Log In"
   logout_success: "Logout Success"
-  there_was_a_problem: "Oops!"
+  there_was_a_problem: "Damnit, Orc! You broke my chicken."
   invalid_email_password: "Incorrect Email/Password Combination"
   password_mismatch: "The Passwords Did Not Match"
   players: "Players"
