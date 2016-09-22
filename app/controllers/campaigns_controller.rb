@@ -1,6 +1,7 @@
 class CampaignsController < ApplicationController
 
   before_action :set_campaign, only: [:show, :update, :destroy]
+  before_action :set_game_systems, only: [:new, :edit]
 
   def index
     @campaigns = Campaign.all
@@ -21,7 +22,7 @@ class CampaignsController < ApplicationController
     else
       flash[:alert] = t(:there_was_a_problem)
       @errors = @campaign.errors
-      render action: :new
+      redirect_to new_campaign_path
     end
   end
 
@@ -39,8 +40,12 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
   end
 
+  def set_game_systems
+    @game_systems = GameSystem.all.order(:name)
+  end
+
   def campaign_params
-    params.require(:campaign).permit(:name, :system)
+    params.require(:campaign).permit(:name, :game_system_id, :owner_id)
   end
 
 end
