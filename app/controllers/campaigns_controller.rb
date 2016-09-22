@@ -1,6 +1,7 @@
 class CampaignsController < ApplicationController
 
-  before_action :set_campaign, only: [:show, :update, :destroy]
+  before_action :set_campaign, only: [:show, :edit, :update, :destroy]
+  before_action :check_permissions, only: [:edit, :update, :destroy]
   before_action :set_game_systems, only: [:new, :edit]
 
   def index
@@ -42,6 +43,10 @@ class CampaignsController < ApplicationController
 
   def set_game_systems
     @game_systems = GameSystem.all.order(:name)
+  end
+
+  def check_permissions
+    redirect_to :root unless current_user == @campaign.owner
   end
 
   def campaign_params

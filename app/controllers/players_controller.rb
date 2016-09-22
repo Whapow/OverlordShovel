@@ -1,9 +1,11 @@
 class PlayersController < ApplicationController
 
   skip_before_action :authorize, only: [:new_registration, :create_registration]
+  before_action :set_player, only: [:show, :edit, :delete]
+  before_action :check_permissions, only: [:edit, :delete]
 
   def index
-
+    @players = Player.all
   end
 
   def show
@@ -60,6 +62,14 @@ class PlayersController < ApplicationController
 
   def player_params
     params.require(:player).permit(:first_name, :last_name, :email, :password, :confirm_password)
+  end
+
+  def set_player
+    @player = Player.find(params[:id])    
+  end
+
+  def check_permissions
+    redirect_to :root unless current_user == @player
   end
 
 end

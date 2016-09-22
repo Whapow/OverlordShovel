@@ -1,0 +1,21 @@
+= form_for player, method: :put, role: "form", class: "sign-up" do |f|
+  .form-group
+    %fieldset
+      %legend= t(:player_info)
+      .form-group
+        = f.label :first_name
+        = f.text_field :first_name, class: "form-control", value: player.first_name, placeholder: "First Name"
+      .form-group
+        = f.label :last_name
+        = f.text_field :last_name, class: "form-control", value: player.last_name, placeholder: "Last Name"
+      .form-group
+        = f.label :email
+        = f.text_field :email, class: "form-control", value: player.email, placeholder: "Email"
+      .form-group
+        = f.label :password
+        = f.password_field :password, class: "form-control", placeholder: "Password"
+      .form-group
+        = f.label :confirm_password
+        = f.password_field :confirm_password, class: "form-control", placeholder: "Password"
+      %div
+        = f.submit "Save", class: "btn btn-primary"
