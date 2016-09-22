@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   end
 
   resources :items
-  resources :systems
+  resources :game_systems
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -28,11 +28,19 @@ class CampaignsController < ApplicationController
   end
 
   def update
+    if @campaign.update(campaign_params)
+      redirect_to campaigns_path, notice: t(:campaign_update)
+    else
+      flash[:alert] = t(:there_was_a_problem)
+      @errors = @campaign.errors
 
+      render action: :edit
+    end
   end
 
   def destroy
-
+    flash[:notice] = "No deletes until I finish soft delete/archival for safety reasons"
+    redirect_to campaigns_path
   end
 
   private
