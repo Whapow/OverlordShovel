@@ -6,10 +6,10 @@
         = f.select :character_id, character_options, {}, class:"form-control"
       .form-group
         = f.label :reward_value
-        = f.text_field :reward_value, class: "form-control", placeholder: "0"
+        = f.text_field :reward_value, class: "form-control", value: 0
       .form-group
         = f.label :experience_value
-        = f.text_field :experience_value, class: "form-control", placeholder: "0"
+        = f.text_field :experience_value, class: "form-control", value: 0
       %div
         = f.submit "Save", class: "btn btn-primary"
       = f.hidden_field :journal_id, value: appearance.journal_id || @journal.id

@@ -33,7 +33,7 @@ class AppearancesController < ApplicationController
 
   def destroy
     flash[:notice] = "No deletes until I finish soft delete/archival for safety reasons"
-    redirect_to appearances_path(@journal.campaign)
+    redirect_to @appearance.journal.chapter
   end
 
   private

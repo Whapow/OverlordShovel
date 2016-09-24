@@ -1,5 +1,9 @@
 = form_for :chapter, url: :chapters, role: "form", class: "form-inline" do |f|
-  .form-group
-    = f.text_field :name, class: "form-control", style: "width:35%", placeholder: "Chapter Name"
-    = f.submit "Add", class: "btn btn-primary"
-    = f.hidden_field :campaign_id, value: @campaign.id
+	.form-group
+		= f.hidden_field :campaign_id, value: campaign.id
+		%tr
+			%td
+				%div.pull-left= f.text_field :name, class: "form-control", placeholder: "Name"
+				%div.pullright= f.submit "New Chapter", class: "btn btn-primary"
+			%td
+			%td

@@ -1,23 +1,17 @@
-- chapters.each do |chapter|
-	%tr
-		%td
-			%div{id:"#{chapter.id}", }
-				%div{"data-toggle"=> "collapse", "data-target"=>"#accordion#{chapter.id}", class:"accordion-toggle"}
-					.h4
-						="#{chapter.name} - #{chapter.created_at.strftime("%d-%b-%Y")}"
-					.badge
-						="#{pluralize(chapter.journals.count, "journal")}"
-				.div{id:"accordion#{chapter.id}", class:"hiddenRow accordion-body collapse#{' in' if chapter.newest?}"}
-					%table{class:"center-table"}
-						%thead
-						%tbody
-							- chapter.journals.sort_by{|x| x[:created_at]}.group_by{|x| x.created_at.strftime("%d-%b-%Y")}.each do |date, journals|
-								%tr.date-stamp
-									%td
-										%hr
-										%b.underline #{date}
-										%br
-										%br
-								%tr
-									%td
-										= render 'journals', journals: journals
+%table{class: "table table-striped table-condensed table-hover"}
+  %thead
+    %tr
+      %th= t(:chapter_name)
+      %th{colspan: 3}
+  %tbody
+    - chapters.each do |chapter|
+      %tr
+        %td= link_to chapter.name, chapter_path(chapter), 'data-no-turbolink' => true
+        %td
+        %td
+          - if current_user == @campaign.owner
+            = link_to t(:edit), edit_chapter_path(chapter), class:"btn btn-info pull-right"
+        %td
+          - if current_user == @campaign.owner
+            = link_to t(:delete), chapter_path(chapter), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger pull-left"
+    = render 'chapter_form', campaign: @campaign

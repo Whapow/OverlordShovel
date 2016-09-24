@@ -23,7 +23,7 @@ class ChaptersController < ApplicationController
     else
       flash[:alert] = t(:there_was_a_problem)
       @errors = @chapter.errors
-      redirect_to :back
+      redirect_to @journal.chapter
     end
   end
 
@@ -40,7 +40,7 @@ class ChaptersController < ApplicationController
 
   def destroy
     flash[:notice] = "No deletes until I finish soft delete/archival for safety reasons"
-    redirect_to chapters_path(@campaign)
+    redirect_to @chapter.campaign
   end
 
   private
