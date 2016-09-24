@@ -21,9 +21,13 @@ Rails.application.routes.draw do
 
   resources :campaigns do
     member do
-      resources :journals do
+      resources :chapters do
         member do
-          resources :play_sessions
+          resources :journals do
+            member do
+              resources :appearances
+            end
+          end
         end
       end
     end

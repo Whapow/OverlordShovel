@@ -1,4 +1,4 @@
-class DeviseSessionsController < ApplicationController
+class SessionsController < ApplicationController
   skip_before_action :authorize
 
   def login; end

@@ -46,7 +46,7 @@ class CharactersController < ApplicationController
   private
 
   def set_character
-    @character = Character.find(params[:id]).includes(:player, :campaign)
+    @character = Character.includes(:player, :campaign).find(params[:id])
   end
 
   def set_campaigns

@@ -1,0 +1,23 @@
+%table{class: "table table-striped table-condensed table-hover"}
+  %thead
+    %tr
+      %th= t(:chapter_name)
+      %th
+      %th
+      %th{colspan: 5}
+  %tbody
+    - chapters.each do |chapter|
+      %tr
+        %td= link_to chapter.name, chapter_path(chapter), 'data-no-turbolink' => true
+        %td
+          - if current_user == chapter.campaign.owner
+            = link_to t(:edit), edit_chapter_path(chapter), class:"btn btn-info pull-right"
+        %td
+          - if current_user == chapter.campaign.owner
+            = link_to t(:delete), chapter_path(chapter), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger pull-left"
+    %tr
+      %td= link_to t(:add_chapter), new_chapter_path, 'data-no-turbolink' => true
+      %td
+      %td
+      %td
+      %td

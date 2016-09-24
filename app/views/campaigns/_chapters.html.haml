@@ -1,0 +1,23 @@
+- chapters.each do |chapter|
+	%tr
+		%td
+			%div{id:"#{chapter.id}", }
+				%div{"data-toggle"=> "collapse", "data-target"=>"#accordion#{chapter.id}", class:"accordion-toggle"}
+					.h4
+						="#{chapter.name} - #{chapter.created_at.strftime("%d-%b-%Y")}"
+					.badge
+						="#{pluralize(chapter.journals.count, "journal")}"
+				.div{id:"accordion#{chapter.id}", class:"hiddenRow accordion-body collapse#{' in' if chapter.newest?}"}
+					%table{class:"center-table"}
+						%thead
+						%tbody
+							- chapter.journals.sort_by{|x| x[:created_at]}.group_by{|x| x.created_at.strftime("%d-%b-%Y")}.each do |date, journals|
+								%tr.date-stamp
+									%td
+										%hr
+										%b.underline #{date}
+										%br
+										%br
+								%tr
+									%td
+										= render 'journals', journals: journals

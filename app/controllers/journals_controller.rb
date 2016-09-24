@@ -1,11 +1,11 @@
 class JournalsController < ApplicationController
 
   before_action :set_journal, only: [:show, :edit, :update, :destroy]
-  before_action :set_campaign, only: [:index, :new, :destroy]
+  before_action :set_chapter, only: [:index, :new, :destroy]
   before_action :check_permissions, only: [:edit, :update, :destroy]
 
   def index
-    @journals = @campaign.journals
+    @journals = @chapter.journals
   end
 
   def show
@@ -19,11 +19,11 @@ class JournalsController < ApplicationController
   def create
     @journal = Journal.create(journal_params)
     if @journal.save 
-      redirect_to @journal
+      redirect_to @journal.chapter
     else
       flash[:alert] = t(:there_was_a_problem)
       @errors = @journal.errors
-      redirect_to new_journal_path
+      redirect_to @journal.chapter
     end
   end
 
@@ -40,25 +40,25 @@ class JournalsController < ApplicationController
 
   def destroy
     flash[:notice] = "No deletes until I finish soft delete/archival for safety reasons"
-    redirect_to journals_path(@campaign)
+    redirect_to journals_path(@chapter)
   end
 
   private
 
   def set_journal
-    @journal = Journal.includes(:campaign).find(params[:id])
+    @journal = Journal.includes(:chapter).find(params[:id])
   end
 
-  def set_campaign
-    @campaign = Campaign.find(params[:id])
+  def set_chapter
+    @chapter = Chapter.find(params[:id])
   end
 
   def check_permissions
-    redirect_to :root unless current_user == @journal.campaign.owner
+    redirect_to :root unless current_user == @journal.chapter.owner
   end
 
   def journal_params
-    params.require(:journal).permit(:name, :campaign_id)
+    params.require(:journal).permit(:name, :chapter_id)
   end
 
 end

@@ -2,12 +2,12 @@
 #
 # Table name: campaigns
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  system_id  :integer
-#  owner_id   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :integer          not null, primary key
+#  name           :string
+#  game_system_id :integer
+#  owner_id       :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 
 require 'rails_helper'

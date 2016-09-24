@@ -46,7 +46,7 @@ class CampaignsController < ApplicationController
   private
 
   def set_campaign
-    @campaign = Campaign.find(params[:id])
+    @campaign = Campaign.includes(chapters:[journals: [:appearances]]).find(params[:id])
   end
 
   def set_game_systems
