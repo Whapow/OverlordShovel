@@ -11,5 +11,8 @@
 
 class Journal < ActiveRecord::Base
 	belongs_to :campaign
+	has_many :play_sessions
+
+	validates_presence_of :campaign_id
 	
 end

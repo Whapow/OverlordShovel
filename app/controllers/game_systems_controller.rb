@@ -38,8 +38,7 @@ class GameSystemsController < ApplicationController
   end
 
   def destroy
-    @game_system.destroy
-    flash[:notice] = t(:game_system_delete)
+    flash[:notice] = "No deletes until I finish soft delete/archival"
     redirect_to game_systems_path
   end
 

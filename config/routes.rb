@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     member do
       resources :journals do
         member do
-          resources :sessions
+          resources :play_sessions
         end
       end
     end
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   resources :items
   resources :game_systems
+  resources :characters
 
 
   # The priority is based upon order of creation: first created -> highest priority.

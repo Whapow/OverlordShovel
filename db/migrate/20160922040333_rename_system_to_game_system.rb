@@ -1,4 +1,4 @@
-class ChangeSystemToGameSystem < ActiveRecord::Migration
+class RenameSystemToGameSystem < ActiveRecord::Migration
   def self.up
     rename_table :systems, :game_systems
     rename_column :campaigns, :system_id, :game_system_id

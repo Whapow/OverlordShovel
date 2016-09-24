@@ -33,7 +33,8 @@ class PlayersController < ApplicationController
   end
 
   def destroy
-
+    flash[:notice] = "No deletes until I finish soft delete/archival for safety reasons"
+    redirect_to players_path
   end
 
   def new_registration

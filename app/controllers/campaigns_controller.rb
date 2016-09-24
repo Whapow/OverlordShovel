@@ -39,7 +39,7 @@ class CampaignsController < ApplicationController
   end
 
   def destroy
-    flash[:notice] = "No deletes until I finish soft delete/archival for safety reasons"
+    flash[:notice] = "No deletes until I finish soft delete/archival"
     redirect_to campaigns_path
   end
 

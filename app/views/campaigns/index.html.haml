@@ -14,11 +14,11 @@
         %td= "#{campaign.owner.first_name} #{campaign.owner.last_name.first}"
         %td= campaign.game_system.name
         %td
-          - if campaign.owner == current_user
+          - if current_user == campaign.owner
             = link_to t(:edit), edit_campaign_path(campaign), class:"btn btn-info pull-right"
         %td
-          - if campaign.owner == current_user
-            = link_to t(:delete), campaign_path(campaign), method: :delete, class:"btn btn-danger pull-left"
+          - if current_user == campaign.owner
+            = link_to t(:delete), campaign_path(campaign), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger pull-left"
     %tr
       %td= link_to t(:add_campaign), new_campaign_path, 'data-no-turbolink' => true
       %td

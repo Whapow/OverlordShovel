@@ -8,6 +8,6 @@
       .form-group
         = f.label :game_system_id, class: "control-label"
         = f.select :game_system_id, game_system_options(campaign), {}, class:"form-control"
-        = f.hidden_field :owner_id, value: campaign.owner_id || current_user.id
       %div
-        = f.submit "Create", class: "btn btn-primary"
+        = f.submit "Save", class: "btn btn-primary"
+      = f.hidden_field :owner_id, value: campaign.owner_id || current_user.id

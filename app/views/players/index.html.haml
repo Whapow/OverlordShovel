@@ -13,5 +13,6 @@
         %td= player.last_name
         %td= player.email
         %td
-          - if player == current_user
+          - if current_user == player
             = link_to t(:edit), edit_player_path(player), class:"btn btn-info pull-right"
+          = link_to t(:characters), characters_path(player), class:"btn btn-info pull-right"
