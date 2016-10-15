@@ -5,7 +5,6 @@
       %th= t(:reward_value)
       %th= t(:experience_value)
       %th
-      %th{colspan: 5}
   %tbody
     - appearances.each do |appearance|
       %tr
@@ -13,12 +12,11 @@
         %td= appearance.reward_value
         %td= appearance.experience_value
         %td
-          - if current_user == appearance.campaign.owner
+          - if current_user.id == appearance.campaign.owner.id
             = link_to t(:delete), appearance_path(appearance), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger pull-right"
             = link_to t(:edit), edit_appearance_path(appearance), class:"btn btn-info pull-right"
     %tr
       %td= link_to t(:add_character), new_appearance_path(journal_id: journal.id), 'data-no-turbolink' => true
-      %td
       %td
       %td
       %td
