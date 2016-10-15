@@ -8,10 +8,9 @@
       %tr
         %td= link_to chapter.name, chapter_path(chapter), 'data-no-turbolink' => true
         %td
-        %td
-          - if current_user == @campaign.owner
+        - if current_user == @campaign.owner
+          %td
             = link_to t(:edit), edit_chapter_path(chapter), class:"btn btn-info pull-right"
-        %td
-          - if current_user == @campaign.owner
+          %td
             = link_to t(:delete), chapter_path(chapter), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger pull-left"
-    = render 'chapter_form', campaign: @campaign
+= render 'chapter_form', campaign: @campaign if current_user == @campaign.owner

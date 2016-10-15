@@ -5,7 +5,7 @@ class CharactersController < ApplicationController
   before_action :check_permissions, only: [:edit, :update, :destroy]
 
   def index
-    @characters = Character.includes(:player, :campaign).all
+    @characters = Player.find(params[:id]).characters.includes(:campaign)
   end
 
   def show
@@ -19,7 +19,7 @@ class CharactersController < ApplicationController
   def create
     @character = Character.create(character_params)
     if @character.save 
-      redirect_to @character
+      redirect_to characters_path(Player.find(params[:id]))
     else
       flash[:alert] = t(:there_was_a_problem)
       @errors = @character.errors

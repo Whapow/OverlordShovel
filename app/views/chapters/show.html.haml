@@ -11,7 +11,7 @@
   %tbody
     %tr
       %td
-        %h3= t(:journals) 
     = t(:no_journals) if @chapter.journals.empty?
     = render 'journals', journals: @chapter.journals.order("journals.created_at")
-    = render 'journal_form'   
+%br   
+= render 'journal_form' if current_user == @chapter.campaign.owner

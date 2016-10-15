@@ -4,7 +4,6 @@
       %th= t(:first_name)
       %th= t(:last_name)
       %th= t(:email)
-      %th
       %th{colspan: 4}
   %tbody
     - @players.each do |player|
@@ -12,7 +11,4 @@
         %td= player.first_name
         %td= player.last_name
         %td= player.email
-        %td
-          - if current_user == player
-            = link_to t(:edit), edit_player_path(player), class:"btn btn-info pull-right"
-          = link_to t(:characters), characters_path(player), class:"btn btn-info pull-right"
+        %td= link_to t(:characters), characters_path(player), class:"btn btn-info pull-right"

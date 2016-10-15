@@ -47,7 +47,11 @@ class AppearancesController < ApplicationController
   end
 
   def set_characters
-    @characters = @journal.campaign.characters
+    if current_user == @journal.campaign.owner 
+      @characters = @journal.campaign.characters
+    else
+      @characters = @journal.campaign.characters.where(player_id: current_user.id)
+    end  
   end
 
   def check_permissions

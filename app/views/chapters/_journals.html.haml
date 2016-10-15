@@ -3,8 +3,8 @@
 		%td
 			%div{id:"#{journal.id}", }
 				%div{"data-toggle"=> "collapse", "data-target"=>"#accordion#{journal.id}", class:"accordion-toggle"}
-					.h4
-						="#{journal.name} - #{journal.created_at.strftime("%d-%b-%Y")}"
+					.h3
+						=journal.name
 					.badge
 						="#{pluralize(journal.appearances.count, "character")}"
 				.div{id:"accordion#{journal.id}", class:"hiddenRow accordion-body collapse#{' in' if journal.newest?}"}
