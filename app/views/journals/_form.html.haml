@@ -6,4 +6,3 @@
         = f.text_field :name, class: "form-control", placeholder: "Journal Name"
       %div
         = f.submit "Save", class: "btn btn-primary"
-      = f.hidden_field :campaign_id, value: journal.campaign_id || @campaign.id

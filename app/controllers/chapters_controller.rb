@@ -1,7 +1,7 @@
 class ChaptersController < ApplicationController
 
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
-  before_action :set_campaign, only: [:index, :new, :destroy]
+  before_action :set_campaign
   before_action :check_permissions, only: [:edit, :update, :destroy]
 
   def index
@@ -29,7 +29,7 @@ class ChaptersController < ApplicationController
 
   def update
     if @chapter.update(chapter_params)
-      redirect_to chapters_path, notice: t(:chapter_update)
+      redirect_to @campaign, notice: t(:chapter_update)
     else
       flash[:alert] = t(:there_was_a_problem)
       @errors = @chapter.errors
@@ -50,7 +50,7 @@ class ChaptersController < ApplicationController
   end
 
   def set_campaign
-    @campaign = Campaign.find(params[:id])
+    @campaign = Campaign.find(params[:campaign_id])
   end
 
   def check_permissions

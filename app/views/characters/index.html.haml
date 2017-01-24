@@ -8,15 +8,15 @@
   %tbody
     - @characters.each do |character|
       %tr
-        %td= link_to character.name, character_path(character), 'data-no-turbolink' => true
+        %td= link_to character.name, player_character_path(@player, character), 'data-no-turbolink' => true
         / %td= "#{character.player.first_name} #{character.player.last_name.first}"
         %td= character.campaign.try(:name) || t(:no_campaign)        
         %td
-          - if current_user == character.player
-            = link_to t(:delete), character_path(character), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger pull-right"
-            = link_to t(:edit), edit_character_path(character), class:"btn btn-info pull-right"
-    - if current_user.id.to_s == params[:id]        
+          - if current_user == @player
+            = link_to t(:delete), player_character_path(@player, character), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger pull-right"
+            = link_to t(:edit), edit_player_character_path(@player, character), class:"btn btn-info pull-right"
+    - if current_user == @player       
       %tr
-        %td= link_to t(:add_character), new_character_path, 'data-no-turbolink' => true
+        %td= link_to t(:add_character), new_player_character_path, 'data-no-turbolink' => true
         %td
         %td

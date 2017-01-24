@@ -20,7 +20,7 @@
           %div{class: "navbar-collapse collapse ", id: "bs-example-navbar-collapse-1"}
             %ul{class: "nav navbar-nav"}
               %li{class: is_controller?("campaigns")}= link_to t(:campaigns), campaigns_path
-              %li{class: is_controller?("characters")}= link_to t(:my_characters), characters_path(current_user)
+              %li{class: is_controller?("characters")}= link_to t(:my_characters), player_characters_path(current_user)
               %li{class: is_controller?("players")}= link_to t(:players), players_path
             %ul{ class: "nav navbar-nav navbar-right"}
               %li.dropdown{id: 'menu'}

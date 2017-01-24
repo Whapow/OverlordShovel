@@ -1,4 +1,4 @@
-= form_for character, role: "form" do |f|
+= form_for [@player, character], role: "form" do |f|
   .form-group
     %fieldset
       .form-group
@@ -9,4 +9,3 @@
         = f.select :campaign_id, campaign_options(character), {}, class:"form-control"
       %div
         = f.submit "Save", class: "btn btn-primary"
-      = f.hidden_field :player_id, value: character.player_id || current_user.id

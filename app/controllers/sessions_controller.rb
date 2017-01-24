@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
 
   def go
     user = Player.find_by(email: session_params[:email])
-    puts "--- #{user} ---"
 
     if user.present? && user.valid_password?(session_params[:password]) && user.encrypted_password.present?
     session[:user_id] = user.id

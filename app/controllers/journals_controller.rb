@@ -1,7 +1,7 @@
 class JournalsController < ApplicationController
 
   before_action :set_journal, only: [:show, :edit, :update, :destroy]
-  before_action :set_chapter, only: [:index, :new, :destroy]
+  before_action :set_chapter
   before_action :check_permissions, only: [:edit, :update, :destroy]
 
   def index
@@ -17,13 +17,14 @@ class JournalsController < ApplicationController
   end
 
   def create
-    @journal = Journal.create(journal_params)
+    @journal = @chapter.journals.create(journal_params)
     if @journal.save 
-      redirect_to @journal.chapter
+      redirect_to campaign_chapter_path(@chapter.campaign, @chapter)
     else
       flash[:alert] = t(:there_was_a_problem)
       @errors = @journal.errors
-      redirect_to @journal.chapter
+
+      redirect_to campaign_chapter_path(@chapter.campaign, @chapter)
     end
   end
 
@@ -50,7 +51,7 @@ class JournalsController < ApplicationController
   end
 
   def set_chapter
-    @chapter = Chapter.find(params[:id])
+    @chapter = Chapter.find(params[:chapter_id])
   end
 
   def check_permissions

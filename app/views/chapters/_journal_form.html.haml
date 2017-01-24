@@ -1,6 +1,6 @@
-= form_for :journal, url: :journals, role: "form", class: "form-inline" do |f|
+= form_for [@campaign, @chapter, Journal.new], role: "form", class: "form-inline" do |f|
 	.form-group
-		= f.hidden_field :chapter_id, value: @chapter.id
+		/ = f.hidden_field :chapter_id, value: @chapter.id
 		%tr
 			%td
 				%div.pull-left= f.text_field :name, class: "form-control", placeholder: "Journal Name"

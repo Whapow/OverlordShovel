@@ -1,4 +1,4 @@
-= form_for appearance, role: "form" do |f|
+= form_for [@journal.chapter.campaign, @journal.chapter, @journal, appearance], role: "form" do |f|
   .form-group
     %fieldset
       .form-group
@@ -12,4 +12,3 @@
         = f.text_field :experience_value, class: "form-control", value: 0
       %div
         = f.submit "Save", class: "btn btn-primary"
-      = f.hidden_field :journal_id, value: appearance.journal_id || @journal.id

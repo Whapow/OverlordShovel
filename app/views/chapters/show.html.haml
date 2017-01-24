@@ -1,9 +1,9 @@
 %div
   %div.titleBar
     %span
-      = link_to "Back To Campaign", @chapter.campaign, class: "btn btn-primary pull-left"
-      - if current_user == @chapter.campaign.owner
-        =link_to "Edit Chapter Details", edit_chapter_path(@chapter), 'data-no-turbolink' => true, class: "btn btn-primary pull-right"
+      = link_to "Back To Campaign", @campaign, class: "btn btn-primary pull-left"
+      - if current_user == @campaign.owner
+        =link_to "Edit Chapter Details", edit_campaign_chapter_path(@campaign, @chapter), 'data-no-turbolink' => true, class: "btn btn-primary pull-right"
     %h2{style:"text-align:center"}="#{@chapter.name}"
 %div
   %table{class: "table table-bordered", id:"chapters"}
@@ -14,4 +14,4 @@
     = t(:no_journals) if @chapter.journals.empty?
     = render 'journals', journals: @chapter.journals.order("journals.created_at")
 %br   
-= render 'journal_form' if current_user == @chapter.campaign.owner
+= render 'journal_form' if current_user == @campaign.owner

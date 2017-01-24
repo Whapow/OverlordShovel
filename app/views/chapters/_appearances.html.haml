@@ -13,10 +13,10 @@
         %td= appearance.experience_value
         %td
           - if current_user.id == appearance.campaign.owner.id
-            = link_to t(:delete), appearance_path(appearance), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger pull-right"
-            = link_to t(:edit), edit_appearance_path(appearance), class:"btn btn-info pull-right"
+            = link_to t(:delete), campaign_chapter_journal_appearance_path(@campaign, @chapter, journal, appearance), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger pull-right"
+            = link_to t(:edit), edit_campaign_chapter_journal_appearance_path(@campaign, @chapter, journal, appearance), class:"btn btn-info pull-right"
     %tr
-      %td= link_to t(:add_character), new_appearance_path(journal_id: journal.id), 'data-no-turbolink' => true
+      %td= link_to t(:add_character), new_campaign_chapter_journal_appearance_path(@campaign, @chapter, journal), 'data-no-turbolink' => true
       %td
       %td
       %td

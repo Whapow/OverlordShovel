@@ -6,9 +6,9 @@ Rails.application.routes.draw do
       get 'sign_up', as: :new_registration, action: :new_registration
       post 'sign_up', as: :create_registration, action: :create_registration
     end
-    member do
-      resources :characters
-    end
+    get 'change_password', as: :change_password, action: :change_password
+    put 'change_password', as: :update_password, action: :update_password
+    resources :characters
   end
 
   get "login" => 'sessions#login', as: :login
@@ -20,22 +20,15 @@ Rails.application.routes.draw do
   end
 
   resources :campaigns do
-    member do
-      resources :chapters do
-        member do
-          resources :journals do
-            member do
-              resources :appearances
-            end
-          end
-        end
+    resources :chapters do
+      resources :journals do
+        resources :appearances
       end
     end
   end
 
   resources :items
   resources :game_systems
-  resources :characters
 
 
   # The priority is based upon order of creation: first created -> highest priority.

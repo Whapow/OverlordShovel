@@ -5,3 +5,5 @@
 = @player.email
 %br
 = link_to t(:edit), edit_player_path(@player), class:"btn btn-info"
+- if @player == current_user 
+	= link_to t(:change_password), player_change_password_path(@player), class:"btn btn-info"

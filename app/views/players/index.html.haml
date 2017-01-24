@@ -11,4 +11,4 @@
         %td= player.first_name
         %td= player.last_name
         %td= player.email
-        %td= link_to t(:characters), characters_path(player), class:"btn btn-info pull-right"
+        %td= link_to t(:characters), player_characters_path(player), class:"btn btn-info pull-right"
