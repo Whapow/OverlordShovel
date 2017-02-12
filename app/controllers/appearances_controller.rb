@@ -1,7 +1,7 @@
 class AppearancesController < ApplicationController
 
   before_action :set_appearance, only: [:show, :edit, :update, :destroy]
-  before_action :set_journal, only: [:new, :edit]
+  before_action :set_journal
   before_action :set_characters, only: [:new, :edit]
   before_action :check_permissions, only: [:edit, :update, :destroy]
 
@@ -11,12 +11,13 @@ class AppearancesController < ApplicationController
 
   def create
     @appearance = Appearance.create(appearance_params)
+    @appearance.journal = @journal
     if @appearance.save 
       redirect_to campaign_chapter_path(@appearance.journal.chapter.campaign, @appearance.journal.chapter)
     else
       flash[:alert] = t(:there_was_a_problem)
       @errors = @appearance.errors
-      redirect_to new_appearance_path
+      redirect_to new_campaign_chapter_journal_appearance_path(@journal.chapter.campaign, @journal.chapter, @journal)
     end
   end
 
